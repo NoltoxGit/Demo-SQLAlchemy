@@ -27,8 +27,7 @@ db_telephones = db_curseur.fetchall()
 
 for query_telephones in db_telephones:
     id_telephone, marque, modele, prix = query_telephones
-
-    print(f"{id_telephone} - {marque} {modele} : {prix} €")
+    print(f"ID: {id_telephone} • {marque} {modele} coûte {prix}€")
 
 connexion.commit()
 connexion.close()
