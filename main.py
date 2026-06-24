@@ -7,12 +7,17 @@ curseur.execute("""
 CREATE TABLE IF NOT EXISTS phones (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     marque TEXT NOT NULL,
-    type TEXT NOT NULL,
+    modele TEXT NOT NULL,
     prix INTEGER NOT NULL
 )
 """)
 
+curseur.execute("""
+INSERT INTO phones (marque, modele, prix)
+VALUES (?, ?, ?)
+""", ("Samsung", "Galaxy S24", 899))
+
 connexion.commit()
 connexion.close()
 
-print("La base de données vient d'être créée avec succès !")
+print("Téléphone ajouté avec succès !")
