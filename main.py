@@ -26,10 +26,7 @@ WHERE prix > ?
 db_telephones = db_curseur.fetchall()
 
 for query_telephones in db_telephones:
-    id_telephone = query_telephones[0]
-    marque = query_telephones[1]
-    modele = query_telephones[2]
-    prix = query_telephones[3]
+    id_telephone, marque, modele, prix = query_telephones
 
     print(f"{id_telephone} - {marque} {modele} : {prix} €")
 
