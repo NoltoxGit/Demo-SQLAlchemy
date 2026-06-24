@@ -6,9 +6,9 @@ curseur = connexion.cursor()
 curseur.execute("""
 CREATE TABLE IF NOT EXISTS phones (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    brand TEXT NOT NULL,
-    model TEXT NOT NULL,
-    price_eur INTEGER NOT NULL
+    marque TEXT NOT NULL,
+    type TEXT NOT NULL,
+    prix INTEGER NOT NULL
 )
 """)
 
