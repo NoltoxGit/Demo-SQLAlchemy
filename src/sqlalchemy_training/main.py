@@ -1,8 +1,10 @@
 # -> Importation de la librairie sqlite3
 import sqlite3
+
 # -> Connexion à la base de données SQLite
 db_connexion = sqlite3.connect("phones.db")
 db_curseur = db_connexion.cursor()
+
 # -> Création de la table "phones" (si elle n'existe pas déjà)
 db_curseur.execute("""
 CREATE TABLE IF NOT EXISTS phones (
@@ -20,6 +22,7 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
     email TEXT NOT NULL UNIQUE
 )
 """)
+
 # -> Insertion de données dans la table "phones"
 db_curseur.execute("""
 INSERT INTO phones (marque, modele, prix)
