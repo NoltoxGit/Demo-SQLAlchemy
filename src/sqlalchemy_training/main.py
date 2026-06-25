@@ -9,7 +9,8 @@ def db_create_telephone(db_curseur):
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         marque TEXT NOT NULL,
         modele TEXT NOT NULL,
-        prix INTEGER NOT NULL
+        prix INTEGER NOT NULL,
+        UNIQUE(marque, modele)
     )
     """)
 
@@ -26,16 +27,11 @@ def db_create_utilisateur(db_curseur):
 
 
 # -> Insertion de téléphones
-def db_ajouter_telephones(db_curseur):
+def db_ajouter_telephones(db_curseur, marque, modele, prix):
     db_curseur.execute("""
-    INSERT INTO telephone (marque, modele, prix)
+    INSERT OR IGNORE INTO telephone (marque, modele, prix)
     VALUES (?, ?, ?)
-    """, ("Samsung", "Galaxy A55", 449))
-
-    db_curseur.execute("""
-    INSERT INTO telephone (marque, modele, prix)
-    VALUES (?, ?, ?)
-    """, ("Samsung", "Galaxy Z Flip6", 1199))
+    """, (marque, modele, prix))
 
 
 # -> Affichage des téléphones
@@ -87,7 +83,8 @@ def main():
     db_create_telephone(db_curseur)
     db_create_utilisateur(db_curseur)
 
-    db_ajouter_telephones(db_curseur)
+    db_ajouter_telephones(db_curseur, "Samsung", "Galaxy A55", 449)
+    db_ajouter_telephones(db_curseur, "Samsung", "Galaxy Z Flip6", 1199)
     db_afficher_telephones(db_curseur, 800)
 
     db_ajouter_utilisateur(db_curseur, "Paul", "paul@example.com")
