@@ -13,6 +13,14 @@ CREATE TABLE IF NOT EXISTS phones (
 """)
 
 db_curseur.execute("""
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE
+)
+""")
+
+db_curseur.execute("""
 INSERT INTO phones (marque, modele, prix)
 VALUES (?, ?, ?)
 """, ("Samsung", "Galaxy A55", 449))
