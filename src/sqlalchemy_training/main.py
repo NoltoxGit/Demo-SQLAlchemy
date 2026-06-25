@@ -59,6 +59,20 @@ def db_afficher_telephones(db_curseur, prix_minimum):
         id_telephone, marque, modele, prix = query_telephone
         print(f"[DEBUG: PHONE] ID: {id_telephone} • Le téléphone \"{marque} {modele}\" coûte {prix} €.")
 
+# -> Récupération de l'ID d'un téléphone à partir de sa marque et de son modèle
+def db_get_telephone_id_by_marque_modele(db_curseur, marque, modele):
+    db_curseur.execute("""
+    SELECT id
+    FROM telephone
+    WHERE marque = ? AND modele = ?
+    """, (marque, modele))
+
+    result = db_curseur.fetchone()
+
+    if result is None:
+        return None
+
+    return result[0]
 
 
 # -> Ajout des informations d'un utilisateur dans la table "utilisateur"
