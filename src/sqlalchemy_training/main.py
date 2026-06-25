@@ -1,7 +1,6 @@
 # -> Importation du module sqlite3 pour interagir avec une base de données SQLite locale
 import sqlite3
 
-
 # -> Création de la table "telephone" si elle n'existe pas déjà
 def db_create_telephone(db_curseur):
     db_curseur.execute("""
@@ -14,7 +13,6 @@ def db_create_telephone(db_curseur):
     )
     """)
 
-
 # -> Création de la table "utilisateur" si elle n'existe pas déjà
 def db_create_utilisateur(db_curseur):
     db_curseur.execute("""
@@ -24,7 +22,6 @@ def db_create_utilisateur(db_curseur):
         email TEXT NOT NULL UNIQUE
     )
     """)
-
 
 # -> Création de la table "favori" si elle n'existe pas déjà
 def db_create_favori(db_curseur):
@@ -38,12 +35,15 @@ def db_create_favori(db_curseur):
     )
     """)
 
+
+
 # -> Ajout des informations d'un téléphone dans la table "telephone"
 def db_ajouter_telephone(db_curseur, marque, modele, prix):
     db_curseur.execute("""
     INSERT OR IGNORE INTO telephone (marque, modele, prix)
     VALUES (?, ?, ?)
     """, (marque, modele, prix))
+
 # -> Affichage des téléphones dont le prix est supérieur à un prix minimum
 def db_afficher_telephones(db_curseur, prix_minimum):
     db_curseur.execute("""
@@ -60,12 +60,14 @@ def db_afficher_telephones(db_curseur, prix_minimum):
         print(f"[DEBUG: PHONE] ID: {id_telephone} • Le téléphone \"{marque} {modele}\" coûte {prix} €.")
 
 
+
 # -> Ajout des informations d'un utilisateur dans la table "utilisateur"
 def db_ajouter_utilisateur(db_curseur, nom, email):
     db_curseur.execute("""
     INSERT OR IGNORE INTO utilisateur (nom, email)
     VALUES (?, ?)
     """, (nom, email))
+
 # -> Affichage des utilisateurs
 def db_afficher_utilisateurs(db_curseur):
     db_curseur.execute("""
@@ -79,6 +81,22 @@ def db_afficher_utilisateurs(db_curseur):
         id_utilisateur, nom, email = query_utilisateur
         print(f"[DEBUG: USER] ID: {id_utilisateur} • L'utilisateur \"{nom}\" a pour email \"{email}\".")
 
+# -> Récupération de l'ID d'un utilisateur à partir de son email
+def db_get_utilisateur_id_by_email(db_curseur, email):
+    db_curseur.execute("""
+    SELECT id
+    FROM utilisateur
+    WHERE email = ?
+    """, (email,))
+
+    result = db_curseur.fetchone()
+
+    if result is None:
+        return None
+
+    return result[0]
+
+
 
 # -> Ajout d'un favori dans la table "favori" en associant un utilisateur à un téléphone
 def db_ajouter_favori(db_curseur, utilisateur_id, telephone_id):
@@ -86,6 +104,7 @@ def db_ajouter_favori(db_curseur, utilisateur_id, telephone_id):
     INSERT OR IGNORE INTO favori (utilisateur_id, telephone_id)
     VALUES (?, ?)
     """, (utilisateur_id, telephone_id))
+
 
 
 # -> Fonction principale du programme
@@ -111,7 +130,7 @@ def main():
 
     # -> Ajout d'un favori pour l'utilisateur avec l'ID 1 et le téléphone avec l'ID 1
     db_ajouter_favori(db_curseur, 1, 1)
-
+    # -> Sauvegarde des changements et fermeture de la connexion à la base de données
     db_connexion.commit()
     db_connexion.close()
 
