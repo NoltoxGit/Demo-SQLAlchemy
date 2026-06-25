@@ -21,6 +21,11 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
 """)
 
 db_curseur.execute("""
+INSERT INTO utilisateurs (nom, email)
+VALUES (?, ?)
+""", ("Paul", "paul@example.com"))
+
+db_curseur.execute("""
 INSERT INTO phones (marque, modele, prix)
 VALUES (?, ?, ?)
 """, ("Samsung", "Galaxy A55", 449))
@@ -37,6 +42,17 @@ WHERE prix > ?
 ORDER BY prix DESC
 LIMIT 1
 """, (800,))
+
+db_curseur.execute("""
+SELECT id, nom, email
+FROM utilisateurs
+""")
+
+db_utilisateurs = db_curseur.fetchall()
+
+for utilisateur in db_utilisateurs:
+    id_utilisateur, nom, email = utilisateur
+    print(f"ID: {id_utilisateur} • {nom} • {email}")
 
 db_telephones = db_curseur.fetchall()
 
