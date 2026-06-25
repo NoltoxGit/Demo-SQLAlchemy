@@ -38,14 +38,12 @@ def db_create_favori(db_curseur):
     )
     """)
 
-# -> Insertion d'un téléphone
+# -> Ajout des informations d'un téléphone dans la table "telephone"
 def db_ajouter_telephone(db_curseur, marque, modele, prix):
     db_curseur.execute("""
     INSERT OR IGNORE INTO telephone (marque, modele, prix)
     VALUES (?, ?, ?)
     """, (marque, modele, prix))
-
-
 # -> Affichage des téléphones dont le prix est supérieur à un prix minimum
 def db_afficher_telephones(db_curseur, prix_minimum):
     db_curseur.execute("""
@@ -62,14 +60,12 @@ def db_afficher_telephones(db_curseur, prix_minimum):
         print(f"[DEBUG: PHONE] ID: {id_telephone} • Le téléphone \"{marque} {modele}\" coûte {prix} €.")
 
 
-# -> Insertion d'un utilisateur
+# -> Ajout des informations d'un utilisateur dans la table "utilisateur"
 def db_ajouter_utilisateur(db_curseur, nom, email):
     db_curseur.execute("""
     INSERT OR IGNORE INTO utilisateur (nom, email)
     VALUES (?, ?)
     """, (nom, email))
-
-
 # -> Affichage des utilisateurs
 def db_afficher_utilisateurs(db_curseur):
     db_curseur.execute("""
@@ -82,6 +78,14 @@ def db_afficher_utilisateurs(db_curseur):
     for query_utilisateur in db_utilisateurs:
         id_utilisateur, nom, email = query_utilisateur
         print(f"[DEBUG: USER] ID: {id_utilisateur} • L'utilisateur \"{nom}\" a pour email \"{email}\".")
+
+
+# -> Ajout d'un favori dans la table "favori" en associant un utilisateur à un téléphone
+def db_ajouter_favori(db_curseur, utilisateur_id, telephone_id):
+    db_curseur.execute("""
+    INSERT OR IGNORE INTO favori (utilisateur_id, telephone_id)
+    VALUES (?, ?)
+    """, (utilisateur_id, telephone_id))
 
 
 # -> Fonction principale du programme
@@ -104,6 +108,9 @@ def main():
     # -> Ajout d'un utilisateur et affichage des utilisateurs
     db_ajouter_utilisateur(db_curseur, "Paul", "contact@paulmuller.dev")
     db_afficher_utilisateurs(db_curseur)
+
+    # -> Ajout d'un favori pour l'utilisateur avec l'ID 1 et le téléphone avec l'ID 1
+    db_ajouter_favori(db_curseur, 1, 1)
 
     db_connexion.commit()
     db_connexion.close()
