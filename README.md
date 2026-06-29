@@ -1,19 +1,21 @@
 # SQLAlchemy Training
-Dans le cadre de mon stage, je me suis formé à l'utilisation de **SQLAlchemy** pour manipuler des bases de données relationnelles avec Python.
+Dans le cadre de mon stage à [**BP²I**](https://www.linkedin.com/company/bnp-paribas-partners-for-innovation/about/) pour valider ma 1ère année de BTS SIO SLAM, je me suis formé à l'utilisation de **SQLAlchemy** pour manipuler des bases de données relationnelles avec Python, afin de prendre en main le fonctionnement de leurs outils internes.
 
 ---
 
 ## Objectif du projet :
 
-- Définir des modèles SQLAlchemy,
-- Créer et gérer des sessions,
-- Exécuter des requêtes CRUD,
+- Prendre en main SQLite et SQLAlchemy pour manipuler des bases de données relationnelles avec Python,
+- Créer et gérer des sessions de connexion à une base de données,
+- Exécuter des requêtes CRUD *(Create, Read, Update, Delete)*,
 - Structurer une application Python avec une base de données,
-- Comprendre le lien entre le code Python, les tables SQL et les relations.
+- Comprendre le lien entre le code Python, les tables SQL et les relations entre elles,
+- Gérer les dépendances et l'environnement virtuel du projet avec Poetry.
+- Manipuler les données avec Alembic pour gérer les migrations de la base de données.
 
 ## Les langages utilisés dans le projet :
 
-| Image | Role |
+| Langage | Utilisation |
 | --- | --- |
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" width="32"> | Langage utilisé principalement pour écrire les fonctions, lancer le programme et manipuler les données. |
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlalchemy/sqlalchemy-original.svg" alt="SQLAlchemy" width="32"> | ORM Python pour le coeur du projet : il permet de manipuler des tables SQL avec du code Python. |
@@ -61,4 +63,9 @@ Python
 - Documentation Python : https://docs.python.org/3/
 - Documentation SQLite : https://www.sqlite.org/docs.html
 - Documentation SQLAlchemy : https://docs.sqlalchemy.org/
-- Documentation jsDelivr : https://www.jsdelivr.com/documentation
+- Documentation Poetry : https://python-poetry.org/docs/
+- Documentation Alembic : https://alembic.sqlalchemy.org/en/latest/
+
+---
+
+> Ce projet a été réalisé dans le cadre de mon stage à [**BP²I**](https://www.linkedin.com/company/bnp-paribas-partners-for-innovation/about/) pour valider ma 1ère année de BTS SIO SLAM du 22 juin au 31 juillet 2026.
